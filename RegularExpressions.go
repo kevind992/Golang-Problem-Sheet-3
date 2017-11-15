@@ -5,6 +5,7 @@ import(
 	"fmt"
 	"math/rand"
 	"time"
+	"regexp"
 
 )
 
@@ -23,6 +24,7 @@ func main(){
 	for i:=0;i<5;i++{
 		response := ElizaResponce(userInputs[i])
 		fmt.Println("Eliza: ",response)
+		fmt.Println()
 	}
 }
 func ElizaResponce(input string) string{
@@ -34,7 +36,12 @@ func ElizaResponce(input string) string{
 	response[1] = "How does that make you feel?"
 	response[2] = "Why do you say that?"
 
+	if matched, _ := regexp.MatchString(`(?i).*\bfather\b.*`, input); matched {
+		return "Why don't you tell me more about your Father?"
+	}
+
 	ranNum := rand.Intn(3)
 
 	return response[ranNum]
+		
 }
