@@ -13,7 +13,6 @@ func main(){
 
 	rand.Seed(time.Now().UTC().UnixNano())
 	
-
 	var userInputs [9]string
 	userInputs[0] = "People say I look like both my mother and father."
 	userInputs[1] = "Father was a teacher."
@@ -44,12 +43,10 @@ func ElizaResponce(input string) string{
 		return "Why don't you tell me more about your Father?"
 	}
 
-	re := regexp.MustCompile("I am ([^.!?]*)[.!?]?")
-	if re.MatchString(input){
-		return re.ReplaceAllString(input,"How do you know you are $1?")
+	re1 := regexp.MustCompile("I am ([^.!?]*)[.!?]?")
+	if re1.MatchString(input){
+		return re1.ReplaceAllString(input,"How do you know you are $1?")
 	}
-	
-
 	ranNum := rand.Intn(3)
 
 	return response[ranNum]
