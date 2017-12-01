@@ -33,18 +33,18 @@ The user will not be prompted to enter anything. All the inputs have been added 
 
 ### Pre-assigned user inputs.
 
--People say I look like both my mother and father.
--Father was a teacher.
--I was my father's favourite.
--I'm looking forward to the weekend.
--My grandfather was French!
--I am Happy.
--I'm not happy with you responses.
--I am not sure that you understand the effect that your questions are having on me.
--I am supposed to just take what you're saying at face value?
--What time is it?
--What date is it?
--I want to go home.
+- People say I look like both my mother and father.
+- Father was a teacher.
+- I was my father's favourite.
+- I'm looking forward to the weekend.
+- My grandfather was French!
+- I am Happy.
+- I'm not happy with you responses.
+- I am not sure that you understand the effect that your questions are having on me.
+- I am supposed to just take what you're saying at face value?
+- What time is it?
+- What date is it?
+- I want to go home.
 
 ### What are Regular Expressions?
 Adapted from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
