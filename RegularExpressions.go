@@ -7,7 +7,6 @@ import(
 	"time"
 	"regexp"
 	"strings"
-
 )
 
 func main(){
@@ -33,6 +32,17 @@ func main(){
 }
 func ElizaResponce(input string) string{
 	
+	// List of Response Reflections.
+	reflections := [][]string{
+		{"your", "my"},
+		{"you’re", "i am"},
+		{"I", "you"},
+		{"you", "I"},
+		{"me", "you"},
+		{`you`, `me`},
+		{`my`, `your`},
+	}
+
 	var response [3]string
 	response[0] = "I'm not sure what you're trying to say. Could you explain it to me?"
 	response[1] = "How does that make you feel?"
@@ -44,41 +54,27 @@ func ElizaResponce(input string) string{
 		return "Why don't you tell me more about your Father?"
 	}
 
-	re1 := regexp.MustCompile("I am ([^.!?]*)[.!?]?")
-	if re1.MatchString(input){
-		return re1.ReplaceAllString(input,"How do you know you are $1?")
-	}
+	re1 := regexp.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
+	reflect := re1.FindStringSubmatch(input)
+	
+	if len(reflect) > 0 {
 
-	re := regexp.MustCompile(`(?i)i(?:'|\sa)?m (.*)`)
-	deleteIAm := re.FindStringSubmatch(input)
-
-	// List the reflections.
-	reflections := [][]string{
-		{"your", "my"},
-		{"you’re", "i am"},
-		{"I", "you"},
-		{"you", "I"},
-		{"me", "you"},
-	}
-
-	if len(deleteIAm) > 0 {
-
-		splitInput := strings.Split(deleteIAm[1], " ")
-
-		// Loop through each word, reflecting it if there's a match.
-		for i, check := range splitInput {
+		split := strings.Split(reflect[1], " ")
+		
+		// Loop through each word, reflecting it if there is a match.
+		for i, check := range split {
 			for _, reflection := range reflections {
 				if matched, _ := regexp.MatchString(reflection[0], check); matched {
-					splitInput[i] = reflection[1]
+					split[i] = reflection[1]
 					break
 				}
 			}
 		}
 
-		// Put the string back together.
-		joinString := strings.Join(splitInput, " ")
+		//Join the string back together
+		join := strings.Join(split, " ")
 
-		return fmt.Sprintf("How do you know you are %s?", joinString)
+		return fmt.Sprintf("How do you know you are %s?", join)
 	}
 
 	ranNum := rand.Intn(3)
