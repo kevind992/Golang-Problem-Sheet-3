@@ -13,7 +13,7 @@ func main(){
 
 	rand.Seed(time.Now().UTC().UnixNano())
 	
-	var userInputs [9]string
+	var userInputs [12]string
 	userInputs[0] = "People say I look like both my mother and father."
 	userInputs[1] = "Father was a teacher."
 	userInputs[2] = "I was my father's favourite."
@@ -23,8 +23,11 @@ func main(){
 	userInputs[6] = "I'm not happy with you responses."
 	userInputs[7] = "I am not sure that you understand the effect that your questions are having on me."
 	userInputs[8] = "I am supposed to just take what you're saying at face value?"
+	userInputs[9] = "What time is it?"
+	userInputs[10] = "What date is it?"
+	userInputs[11] = "I want to go home."
 
-	for i:=0;i<9;i++{
+	for i:=0;i<12;i++{
 		response := ElizaResponce(userInputs[i])
 		fmt.Println("Eliza: ",response)
 		fmt.Println()
@@ -75,6 +78,25 @@ func ElizaResponce(input string) string{
 		join := strings.Join(split, " ")
 
 		return fmt.Sprintf("How do you know you are %s?", join)
+	}
+
+
+	//Question 6 - 3 new user inputs.
+	if matched, _ := regexp.MatchString(`(?i).*\bdate\b.*`, input); matched {
+		current_time := time.Now().Local()
+		current_date := current_time.Format("01-02-2006")
+
+		return fmt.Sprintf("The Current date is %s",current_date) 
+	}
+	if matched, _ := regexp.MatchString(`(?i).*\btime\b.*`, input); matched {
+
+		current_day := time.Now()
+		return fmt.Sprintf("The Current time is %s ", current_day ) 
+	}
+
+	re1 = regexp.MustCompile(`(?im)^\s*I want ([^\.!]*)[\.!]*\s*$`)
+	if re1.MatchString(input){
+		return re1.ReplaceAllString(input, fmt.Sprintf("Why do you want $1?"))
 	}
 
 	ranNum := rand.Intn(3)
